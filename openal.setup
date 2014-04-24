@@ -9,32 +9,23 @@
    (windows "-lOpenAL32")
    (else "-lopenal")))
 
-(define *alut-options*
-  (cond-expand
-   (macosx "-framework Foundation -D macosx")
-   (else "-lalut")))
-
 (make (("al.so" ("al.scm")
 	(run (csc al.scm -s -O2 -d1 ,*options* -j al)))
        ("alc.so" ("alc.scm")
 	(run (csc -s alc.scm -O2 -d1 ,*options* -j alc)))
-       ("alut.so" ("alut.scm")
-	(run (csc -s alut.scm -O2 -d1 ,*options* ,*alut-options* -j alut)))
        ("openal.so" ("openal.scm")
-	(run (csc -s openal.scm -O2 -d1 ,*options* ,*alut-options* -j openal)))
+	(run (csc -s openal.scm -O2 -d1 ,*options* -j openal)))
        ("al.import.so" ("al.so")
 	(run (csc -s -O2 -d0 al.import.scm)))
        ("alc.import.so" ("alc.so")
 	(run (csc -s -O2 -d0 alc.import.scm)))
-       ("alut.import.so" ("alut.so")
-	(run (csc -s -O2 -d0 alut.import.scm)))
-       ("openal.import.so" ("openal.so" "al.import.so" "alc.import.so" "alut.import.so")
+       ("openal.import.so" ("openal.so" "al.import.so" "alc.import.so")
 	(run (csc -s -O2 -d0 openal.import.scm))) )
-  '("al.so" "alc.so" "alut.so" "openal.so"
-    "al.import.so" "alc.import.so" "alut.import.so" "openal.import.so"))
+  '("al.so" "alc.so" "openal.so"
+    "al.import.so" "alc.import.so" "openal.import.so"))
 
 (install-extension 
  'openal
- '("openal.so" "al.so" "alc.so" "alut.so"
-   "openal.import.so" "al.import.so" "alc.import.so" "alut.import.so")
+ '("openal.so" "al.so" "alc.so"
+   "openal.import.so" "al.import.so" "alc.import.so")
  '((version 0.8)))
