@@ -1,0 +1,10 @@
+;;;; openal.meta -*- Scheme -*-
+
+((synopsis "OpenAL 1.1 bindings")
+ (category sound)
+ (license "BSD")
+ (doc-from-wiki)
+ (needs easyffi make)
+ (test-depends matchable)
+ (author "felix winkelmann")
+ (files "alc.scm" "openal.setup" "openal.release-info" "openal.meta" "alut.scm" "openal.scm" "al.scm" "tests/run.scm" "tests/example.wav"))
