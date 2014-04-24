@@ -6,6 +6,7 @@
 (define *options*
   (cond-expand
    (macosx "-framework OpenAL")
+   (windows "-lOpenAL32")
    (else "-lopenal")))
 
 (define *alut-options*
