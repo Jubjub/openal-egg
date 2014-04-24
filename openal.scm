@@ -3,10 +3,9 @@
 
 (module openal (openal:device-list
 		openal:make-buffer
-		openal:make-source
-		openal:load-buffer)
+		openal:make-source)
   (import scheme chicken foreign)
-  (use al alc alut srfi-4 lolevel data-structures)
+  (use al alc srfi-4 lolevel data-structures)
 
 (define (openal:device-list)
   (string-split
@@ -25,8 +24,6 @@ EOF
 )
     alc:DEVICE_SPECIFIER)
    "/") )
-
-(apply alut:Init (receive (argc+argv)))
 
 (declare (hide check))
 
@@ -84,16 +81,4 @@ EOF
     (check
      (lambda ()
        (al:Sourcei src al:BUFFER buf) ) )
-    src) )
-
-(define (openal:load-buffer filename)
-  (let-values (((format data size freq loop)
-		(check (cut alut:LoadWAVFile filename) "can not load WAV" filename) ) )
-    (let ((v (make-u32vector 1)))
-      (check (cut al:GenBuffers 1 v) "can not generate buffer for WAV" filename)
-      (let ((buf (u32vector-ref v 0)))
-	(check (cut al:BufferData buf format data size freq) "can not set buffer data for WAV" filename)
-	(alut:UnloadWAV format data size freq)
-	buf) ) ) )
-
-)
+    src) ))
