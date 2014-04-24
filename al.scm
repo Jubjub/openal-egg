@@ -339,8 +339,10 @@ ALAPI ALvoid	ALAPIENTRY alGetFloatv( ALenum param, ALfloat* data );
 ALAPI ALvoid	ALAPIENTRY alGetDoublev( ALenum param, ALdouble* data );
 ALAPI char*	ALAPIENTRY alGetString( ALenum param );
 
+/*
 ALAPI ALvoid	ALAPIENTRY alSetInteger( ALenum pname, ALint value );
 ALAPI ALvoid	ALAPIENTRY alSetDouble( ALenum pname, ALdouble value );
+*/
 
 /**
  * Error support.
